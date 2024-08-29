@@ -1,8 +1,8 @@
 import BlogCardList from "./components/blogCardList/BlogCardList";
 import { BlogData } from "./types/types";
-
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 async function getBlogAllData() {
-  const response = await fetch("http://localhost:3000/api/post", {
+  const response = await fetch(`${apiUrl}/api/post`, {
     cache: "no-store",
   });
 

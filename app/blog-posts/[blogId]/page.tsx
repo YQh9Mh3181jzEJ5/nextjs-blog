@@ -11,9 +11,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { formatDate } from "@/app/utils/formatDate";
-
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 async function getDetailBlogData(id: number) {
-  const response = await fetch(`http://localhost:3000/api/post/${id}`, {
+  const response = await fetch(`${apiUrl}/api/post/${id}`, {
     cache: "no-store",
   });
 
