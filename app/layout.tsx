@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+
+import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import Header from "./components/layouts/header/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-noto-sans-jp",
+  preload: true,
+});
 
 export const metadata: Metadata = {
   title: "My Blog",
@@ -17,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
+      <body className={notoSansJP.className}>
         <Header />
         {children}
       </body>
