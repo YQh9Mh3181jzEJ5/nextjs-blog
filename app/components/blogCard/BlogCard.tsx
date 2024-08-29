@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { BlogData } from "../../types/types";
-import { formatDate } from "@/app/blog-posts/[blogId]/page";
+import { formatDate } from "@/app/utils/formatDate";
 
 interface BlogDataProps {
   blogData: BlogData;

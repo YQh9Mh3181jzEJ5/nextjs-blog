@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { formatDate } from "@/app/utils/formatDate";
 
 async function getDetailBlogData(id: number) {
   const response = await fetch(`http://localhost:3000/api/post/${id}`, {
@@ -19,17 +20,6 @@ async function getDetailBlogData(id: number) {
   const blogDetailData: BlogData = await response.json();
 
   return blogDetailData;
-}
-
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat("ja-JP", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(date);
 }
 
 const BlogDetailPage = async ({ params }: { params: { blogId: number } }) => {
