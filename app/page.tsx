@@ -1,8 +1,9 @@
 import BlogCardList from "./components/blogCardList/BlogCardList";
 import { BlogData } from "./types/types";
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+import { API_BASE_URL } from "./utils/config";
+
 async function getBlogAllData() {
-  const response = await fetch(`${apiUrl}/api/post`, {
+  const response = await fetch(`${API_BASE_URL}/api/post`, {
     cache: "no-store",
   });
 

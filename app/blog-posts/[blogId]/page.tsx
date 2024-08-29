@@ -10,10 +10,10 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { formatDate } from "@/app/utils/formatDate";
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+import { API_BASE_URL } from "@/app/utils/config";
+
 async function getDetailBlogData(id: number) {
-  const response = await fetch(`${apiUrl}/api/post/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api/post/${id}`, {
     cache: "no-store",
   });
 
@@ -22,12 +22,23 @@ async function getDetailBlogData(id: number) {
   return blogDetailData;
 }
 
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat("ja-JP", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+}
+
 const BlogDetailPage = async ({ params }: { params: { blogId: number } }) => {
   const blogDetailData = await getDetailBlogData(params.blogId);
   const { title, content, username, createdAt } = blogDetailData;
 
   return (
-    <div className="container mx-auto max-w-4xl pt-24 px-4 space-y-8">
+    <div className="container mx-auto max-w-4xl pt-12 px-4 space-y-8">
       <Card className="shadow-lg">
         <CardHeader className="space-y-2">
           <CardTitle className="text-3xl font-bold text-gray-800">
@@ -38,7 +49,7 @@ const BlogDetailPage = async ({ params }: { params: { blogId: number } }) => {
             <span>{formatDate(createdAt)}</span>
           </CardDescription>
         </CardHeader>
-        <CardContent>{content}</CardContent>
+        <CardContent className="prose max-w-none">{content}</CardContent>
       </Card>
       <Link href="/" className="inline-block">
         <Button variant="outline" className="flex items-center space-x-2">
